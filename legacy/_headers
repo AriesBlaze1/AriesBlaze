@@ -1,0 +1,14 @@
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+
+/images/og-card.jpg
+  Content-Type: image/jpeg
+  Cache-Control: public, max-age=86400
+
+/images/*
+  Cache-Control: public, max-age=86400
+
+/assets/*.pdf
+  Content-Type: application/pdf
+  Content-Disposition: attachment
