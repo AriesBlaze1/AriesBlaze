@@ -24,13 +24,14 @@ export function MetricModule({ value, label }: { value: string; label: string })
   return <PortfolioModule className="metric-module"><strong>{value}</strong><span>{label}</span></PortfolioModule>;
 }
 
-type Tool = { name: string; logo: string; purpose: string };
+type Tool = { name: string; logo?: string; purpose: string };
 export function StackModule({ tools }: { tools: Tool[] }) {
-  return <PortfolioModule className="stack-module" labelledBy="stack-title">
-    <div className="module-heading"><p className="module-label">Technical stack</p><Link href="/about">Full profile <Arrow /></Link></div>
-    <h2 id="stack-title">Tools with a purpose.</h2>
-    <div className="tool-marquee" aria-label="Technology stack"><div className="tool-track">{[...tools, ...tools].map((tool, index) => <div className="tool-chip" key={`${tool.name}-${index}`} aria-hidden={index >= tools.length}><img src={`https://cdn.simpleicons.org/${tool.logo}/20211f`} alt={index < tools.length ? `${tool.name} logo` : ''} /><span>{tool.name}</span><small>{tool.purpose}</small></div>)}</div></div>
-  </PortfolioModule>;
+  return <div className="about-tools">
+    <div className="tool-marquee" role="region" aria-label="Technology tools and their purposes"><div className="tool-track">{[...tools, ...tools].map((tool, index) => <div className="tool-chip" key={`${tool.name}-${index}`} aria-hidden={index >= tools.length}>
+      {tool.logo ? <img src={`https://cdn.simpleicons.org/${tool.logo}/20211f`} alt="" loading="lazy" /> : <span className="tool-generic-icon" aria-hidden="true">{tool.name === 'SQL' ? 'DB' : tool.name}</span>}
+      <span>{tool.name}</span><small>{tool.purpose}</small>
+    </div>)}</div></div>
+  </div>;
 }
 
 export function ActivityModule() {

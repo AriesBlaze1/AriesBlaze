@@ -36,6 +36,7 @@ export function CommandPalette() {
   const commands = useMemo<Command[]>(
     () => [
       { label: 'View work', hint: 'Portfolio', href: '/work' },
+      { label: 'Open gallery', hint: 'Media', href: '/gallery' },
       { label: 'Open Spenddeck', hint: 'Product', href: '/work/spenddeck' },
       { label: 'Open SitePulse', hint: 'Product', href: '/work/sitepulse' },
       { label: 'Go to Lab', hint: 'Experiments', href: '/lab' },
@@ -87,5 +88,19 @@ export function CommandPalette() {
 }
 
 export function CommandTrigger() {
-  return <button type="button" className="command-trigger" onClick={() => window.dispatchEvent(new Event('ariesblaze:command'))} aria-label="Open command palette">⌘ <span>K</span></button>;
+  return (
+    <button
+      type="button"
+      className="command-trigger"
+      onClick={() => window.dispatchEvent(new Event('ariesblaze:command'))}
+      aria-label="Open command palette"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+        <circle cx="11" cy="11" r="7" />
+        <path d="m20 20-4-4" />
+      </svg>
+      <span className="command-label">Search</span>
+      <kbd>⌘ K</kbd>
+    </button>
+  );
 }

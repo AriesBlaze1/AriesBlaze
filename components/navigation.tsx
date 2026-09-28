@@ -1,119 +1,47 @@
 'use client';
+
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
-import { navigation, socials } from '@/data/site';
-import { Arrow, BrandMark } from './icons';
-import { CommandTrigger } from './command-palette';
+import { useEffect, useState } from 'react';
+import { navigation } from '@/data/site';
+
+function NavigationIcon({ name }: { name: string }) {
+  if (name === 'Home') return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3.5 10.5 8.5-7 8.5 7"/><path d="M5.5 9.5v10h13v-10M9.5 19.5v-6h5v6"/></svg>;
+  if (name === 'Work') return <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg>;
+  if (name === 'About') return <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 19c.6-3.2 2.8-4.8 6.5-4.8s5.9 1.6 6.5 4.8"/></svg>;
+  return <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="1.8"/><circle cx="9" cy="9" r="1.5"/><path d="m5 17 4.6-4.5 3.1 2.7 2.2-2 4.1 3.8"/></svg>;
+}
 
 export function Navigation() {
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
-  const dialog = useRef<HTMLDialogElement>(null);
-  const toggle = useRef<HTMLButtonElement>(null);
+  const [clock, setClock] = useState('');
+
   useEffect(() => {
-    if (open) dialog.current?.showModal();
-    else dialog.current?.close();
-    const original = document.body.style.overflow;
-    if (open) document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = original;
-    };
-  }, [open]);
-  function close() {
-    setOpen(false);
-    toggle.current?.focus();
-  }
-  const active = (href: string) =>
-    pathname === href || pathname.startsWith(`${href}/`);
+    const formatter = new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Africa/Lagos', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false,
+    });
+    const update = () => setClock(formatter.format(new Date()));
+    update();
+    const interval = window.setInterval(update, 1000);
+    return () => window.clearInterval(interval);
+  }, []);
+
+  const active = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
+
   return (
     <header className="header">
-      <div className="nav-shell container">
-        <Link className="brand" href="/" aria-label="AriesBlaze home">
-          <BrandMark />
-          <span>
-            AriesBlaze<span className="brand-period">.</span>
-          </span>
-        </Link>
+      <div className="nav-shell">
+        <span className="nav-location">Africa/Lagos</span>
         <nav className="desktop-nav" aria-label="Main navigation">
           {navigation.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              aria-current={active(item.href) ? 'page' : undefined}
-            >
-              {item.label}
-              {item.label === 'Lab' && <span className="lab-dot" />}
+            <Link key={item.href} href={item.href} aria-current={active(item.href) ? 'page' : undefined}>
+              <NavigationIcon name={item.label} />
+              <span>{item.label}</span>
             </Link>
           ))}
         </nav>
-        <CommandTrigger />
-        <Link className="nav-contact" href="/contact">
-          Let’s talk <Arrow diagonal />
-        </Link>
-        <button
-          ref={toggle}
-          className="menu-toggle"
-          onClick={() => setOpen(true)}
-          aria-expanded={open}
-          aria-controls="mobile-navigation"
-          aria-label="Menu"
-        >
-          <span className="sr-only">Menu</span>
-          <span className="hamburger" aria-hidden="true">
-            <i />
-            <i />
-            <i />
-          </span>
-        </button>
+        <time className="nav-clock" aria-label="Current time in Lagos">{clock || '00:00:00'}</time>
       </div>
-      <dialog
-        id="mobile-navigation"
-        aria-label="Site navigation"
-        ref={dialog}
-        className="mobile-menu"
-        onCancel={close}
-        onClose={() => setOpen(false)}
-        onClick={(event) => {
-          if (event.target === event.currentTarget) close();
-        }}
-      >
-        <div className="mobile-menu-top">
-          <span className="eyebrow">AriesBlaze / Navigation</span>
-          <button onClick={close} autoFocus aria-label="Close navigation">
-            Close ×
-          </button>
-        </div>
-        <nav aria-label="Mobile navigation">
-          {[...navigation, { label: 'Contact', href: '/contact' }].map(
-            (item, index) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                aria-current={active(item.href) ? 'page' : undefined}
-              >
-                <span className="mono">0{index + 1}</span>
-                {item.label}
-                <Arrow diagonal />
-              </Link>
-            ),
-          )}
-        </nav>
-        <div className="mobile-menu-bottom">
-          {socials.map((social) => (
-            <a
-              key={social.label}
-              href={social.url}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {social.label} ↗
-            </a>
-          ))}
-          <p>John Oyekunle · Lagos, Nigeria</p>
-        </div>
-      </dialog>
     </header>
   );
 }

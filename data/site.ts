@@ -11,8 +11,13 @@ export const site = {
     'John Oyekunle, building as AriesBlaze. Software & Product Developer in Lagos, Nigeria. SaaS, AI tools, and the systems behind useful digital products.',
 };
 export const navigation = [
+  { label: 'Home', href: '/' },
   { label: 'Work', href: '/work' },
   { label: 'About', href: '/about' },
+  { label: 'Gallery', href: '/gallery' },
+];
+export const footerNavigation = [
+  ...navigation,
   { label: 'Writing', href: '/writing' },
   { label: 'Lab', href: '/lab' },
 ];
@@ -38,13 +43,13 @@ export const capabilities = [
     number: '01',
     title: 'Product development',
     description:
-      'SaaS, productivity tools, and web applications. From the first idea to a working product.',
+      'SaaS, dashboards, productivity tools, and web applications, from the first idea to a working product.',
   },
   {
     number: '02',
     title: 'Interfaces & interaction',
     description:
-      'Responsive interfaces, clear typography, and considered interactions that make a product easier to use.',
+      'Responsive websites and interfaces, clear typography, considered interactions, and UI or performance improvements for existing products.',
   },
   {
     number: '03',

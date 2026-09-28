@@ -1,5 +1,5 @@
 import { HomeShowcase } from '@/components/home-showcase';
-import { projects } from '@/data/projects';
+import { ndaWork, projects } from '@/data/projects';
 import { site, socials } from '@/data/site';
 import { pageMetadata } from '@/lib/metadata';
 
@@ -9,24 +9,9 @@ export const metadata = pageMetadata(
   '/',
 );
 
-const showcaseOrder = [
-  'spenddeck',
-  'askform',
-  'sitepulse',
-  'velune',
-  'arcnotes',
-  'leadmap',
-  'markprint',
-  'fromus',
-];
-
-const showcaseProjects = showcaseOrder
-  .map((slug) => projects.find((project) => project.slug === slug))
-  .filter((project): project is (typeof projects)[number] => Boolean(project));
-
 export default function Home() {
   return (
-    <div className="home-page">
+    <div className="portfolio-page">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -41,7 +26,7 @@ export default function Home() {
           }).replace(/</g, '\\u003c'),
         }}
       />
-      <HomeShowcase projects={showcaseProjects} totalProjects={projects.length} />
+      <HomeShowcase projects={projects} ndaCount={ndaWork.count} />
     </div>
   );
 }

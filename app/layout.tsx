@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Outfit, Inter } from 'next/font/google';
+import { Geist, Outfit, Inter } from 'next/font/google';
 import { Navigation } from '@/components/navigation';
 import { CommandPalette } from '@/components/command-palette';
 import { SiteFooter } from '@/components/site-footer';
@@ -8,6 +8,11 @@ import './globals.css';
 const outfit = Outfit({
   subsets: ['latin'],
   variable: '--font-outfit',
+  display: 'swap',
+});
+const geist = Geist({
+  subsets: ['latin'],
+  variable: '--font-geist',
   display: 'swap',
 });
 const inter = Inter({
@@ -26,12 +31,12 @@ export const metadata: Metadata = {
   authors: [{ name: site.name, url: site.url }],
   robots: { index: true, follow: true },
 };
-export const viewport: Viewport = { themeColor: '#faf9f6' };
+export const viewport: Viewport = { themeColor: '#ffffff' };
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${outfit.variable} ${inter.variable}`}>
+    <html lang="en" className={`${geist.variable} ${outfit.variable} ${inter.variable}`}>
       <body>
         <a href="#main" className="skip-link">
           Skip to content
