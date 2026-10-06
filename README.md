@@ -37,7 +37,7 @@ For deeper case studies, add verified sections about the problem, product decisi
 
 Netlify configuration is included. Connect the repository, use `npm run build`, and publish `.next` through Netlify's Next.js integration. Next/Image optimization and dynamic article routes require Next.js hosting; do not upload the repository as a plain static site. Vercel or a Node server running `npm start` also works.
 
-The canonical domain defaults to `https://ariesblaze.netlify.app`. If the public domain changes, set `NEXT_PUBLIC_SITE_URL` to its HTTPS origin (without a trailing slash) and rebuild. No secrets are required. `.env.example` documents the one optional variable.
+The canonical domain is `https://ariesblaze.pxxl.click`. Keep `NEXT_PUBLIC_SITE_URL` set to this HTTPS origin (without a trailing slash) in the hosting provider and rebuild after changing it. No secrets are required. `.env.example` documents the variable.
 
 Old `.html` URLs redirect to their new counterparts. The original site is preserved under `legacy/` as historical reference and is not copied into `public` or served by Next.js. Old unverified blog content is not published in the new writing system.
 

@@ -6,9 +6,9 @@ export const site = {
   location: 'Lagos, Nigeria',
   experience: '3 years',
   email: 'ariesblaze1@gmail.com',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://ariesblaze.netlify.app',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://ariesblaze.pxxl.click',
   description:
-    'John Oyekunle, building as AriesBlaze. Software & Product Developer in Lagos, Nigeria. SaaS, AI tools, and the systems behind useful digital products.',
+    'John Oyekunle, known as AriesBlaze, is a software and product developer in Lagos, Nigeria, building websites, web applications, and SaaS products.',
 };
 export const navigation = [
   { label: 'Home', href: '/' },
@@ -22,7 +22,10 @@ export const footerNavigation = [
   { label: 'Lab', href: '/lab' },
 ];
 export const socials: SocialLink[] = [
+  { label: 'LinkedIn', url: 'https://www.linkedin.com/in/ariesblaze/' },
+  { label: 'Telegram', url: 'https://t.me/ariesblaze1' },
   { label: 'X / @ariesblaze', url: 'https://x.com/_ariesblaze' },
+  { label: 'GitHub', url: 'https://github.com/ariesblaze' },
 ];
 export const currently: CurrentActivity[] = [
   {

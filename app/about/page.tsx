@@ -4,10 +4,11 @@ import { ContactBand, PageIntro, SectionHeading } from '@/components/ui';
 import { toolsWithPurpose } from '@/data/tooling';
 import { aboutParagraphs, capabilities, currently, site, technologies } from '@/data/site';
 import { pageMetadata } from '@/lib/metadata';
+import { personEntity } from '@/lib/structured-data';
 
 export const metadata = pageMetadata(
-  'About John',
-  'John Oyekunle is a Software & Product Developer in Lagos. Three years of learning by building, from websites to complete products.',
+  'About John Oyekunle',
+  'Meet John Oyekunle, known online as AriesBlaze: a software and product developer in Lagos, Nigeria, building websites, web applications, and SaaS products.',
   '/about',
 );
 
@@ -24,6 +25,19 @@ const buildSteps = [
 export default function AboutPage() {
   return (
     <div className="container about-page">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'ProfilePage',
+            '@id': `${site.url}/about#profile`,
+            url: `${site.url}/about`,
+            name: 'About John Oyekunle | AriesBlaze',
+            mainEntity: personEntity,
+          }).replace(/</g, '\\u003c'),
+        }}
+      />
       <PageIntro label="John Oyekunle / Building as AriesBlaze" title="I learn by building.">
         <p>Software &amp; Product Developer.<br />{site.location}. Three years and still figuring things out.</p>
       </PageIntro>
