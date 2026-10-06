@@ -35,9 +35,9 @@ For deeper case studies, add verified sections about the problem, product decisi
 
 ## Deployment
 
-Netlify configuration is included. Connect the repository, use `npm run build`, and publish `.next` through Netlify's Next.js integration. Next/Image optimization and dynamic article routes require Next.js hosting; do not upload the repository as a plain static site. Vercel or a Node server running `npm start` also works.
+Production is deployed on Pxxl Space. Pxxl recognizes Next.js projects; use its Web Service target with `npm run build` and `npm start`. This app uses dynamic routes and Next/Image, so it must run as a Next.js server rather than publish as a static site. See Pxxl's [supported stacks](https://docs.pxxl.app/projects/supported-stacks) and [build configuration](https://docs.pxxl.app/deploy/configuration).
 
-The canonical domain is `https://ariesblaze.pxxl.click`. Keep `NEXT_PUBLIC_SITE_URL` set to this HTTPS origin (without a trailing slash) in the hosting provider and rebuild after changing it. No secrets are required. `.env.example` documents the variable.
+The canonical domain is `https://ariesblaze.pxxl.click`. Set `NEXT_PUBLIC_SITE_URL` to this HTTPS origin (without a trailing slash) in the Pxxl project environment for the production build so generated canonical URLs, structured data, robots.txt, and the sitemap use the production domain. Rebuild after changing it. This public variable is also documented in `.env.example`.
 
 Old `.html` URLs redirect to their new counterparts. The original site is preserved under `legacy/` as historical reference and is not copied into `public` or served by Next.js. Old unverified blog content is not published in the new writing system.
 
